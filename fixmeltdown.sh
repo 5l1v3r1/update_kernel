@@ -15,6 +15,8 @@ function checkroot {
 }
 
 function fix {
+  echo 'Current Version: '; uname -r
+  echo ''
   mkdir ~/kernel
   echo -e '\e[1;32m[+]\e[0m\e[1;93m ~/kernel/\e[0m'
   echo -e '\e[1;32m[+]\e[0m\e[1;93m Downloading new kernel\e[0m'
@@ -37,6 +39,7 @@ function fix {
   echo -e '\e[1;33m[ CLEANING UP ]\e[0m'
   rm -rf ~/kernel/
   echo -e '\e[1;32m[ DONE ]\e[0m'
+  echo -e '\e[1;32mTo apply update please do:\e[0m \e[1;96mshutdown -r 0\e[0m'
 }
 
 checkroot
