@@ -5,7 +5,7 @@ Install kernel v4.14.12 to fix Meltdown (CVE-2017-5754)
 Test Exploit:
 ```shell
 wget https://raw.githubusercontent.com/speed47/spectre-meltdown-checker/master
-./spectre-meltdown-checker.sh
+sudo ./spectre-meltdown-checker.sh
 ```
 
 ***
