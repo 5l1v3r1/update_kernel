@@ -1,5 +1,5 @@
 # Fix_Meltdown_CVE-2017-5754
-Install kernel v4.14.12 to fix Meldown (CVE-2017-5754)
+Install kernel v4.14.12 to fix Meltdown (CVE-2017-5754)
 
 
 Test Exploit:
