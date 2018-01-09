@@ -10,4 +10,4 @@ wget https://raw.githubusercontent.com/speed47/spectre-meltdown-checker/master
 
 ***
 
-source: https://www.cyberciti.biz/faq/check-linux-server-for-spectre-meltdown-vulnerability/)
+source: https://www.cyberciti.biz/faq/check-linux-server-for-spectre-meltdown-vulnerability/
