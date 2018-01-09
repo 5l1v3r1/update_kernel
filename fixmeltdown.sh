@@ -11,6 +11,8 @@ function checkroot {
     echo ''
     echo -e "\e[1;93mInstalling Kernel update v4.14.12\e[0m \e[1;31m(Fix Meltdown Exploit CVE-2017-5754)\e[0m"
     pause; fix
+  else
+    echo -e '\e[1;31m[ERROR]\e[0m \e[1mRoot is required\e[0m'
   fi
 }
 
@@ -39,7 +41,20 @@ function fix {
   echo -e '\e[1;33m[ CLEANING UP ]\e[0m'
   rm -rf ~/kernel/
   echo -e '\e[1;32m[ DONE ]\e[0m'
-  echo -e '\e[1;32mTo apply update please do:\e[0m \e[1;96mshutdown -r 0\e[0m'
+  #echo -e '\e[1;32mTo apply update please do:\e[0m \e[1;96mshutdown -r 0\e[0m'
+  reboot
+}
+
+function reboot {
+  echo ''
+  echo -e '\e[1;95mReboot system now? (y/n)'; read _yn
+  if [[ $_yn =~ ^[Yy]$ ]]; then
+    echo -e '\e[1;32m[ DONE ]\e[0m'
+    echo -e '\e[1mRebooting...'; sleep 1s
+    shutdown -r 0
+  else
+    echo -e '\e[1;32m[ DONE ]\e[0m'
+  fi
 }
 
 checkroot
