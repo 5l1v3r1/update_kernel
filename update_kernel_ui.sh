@@ -38,13 +38,9 @@ if [ $? -eq 0 ]; then
   echo "# Downloading new kernel...[5]"
   wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-image-4.14.12-041412-lowlatency_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
   echo "70"
+  
   echo "# Installing new kernel"
-
-  dpkg -i ~/kernel/*.deb  | tee >(${_zenity} --width=200 --height=100 \
-              --title="Downloading" --progress \
-              --pulsate --text="Downloading new kernel...[6]" \
-              --auto-kill --auto-close \
-              --percentage=10) >${_out}
+  dpkg -i ~/kernel/*.deb
   echo "100"
   echo "# Finished updating kernel"
 
