@@ -3,6 +3,17 @@ _zenity="/usr/bin/zenity"
 
 _out="/tmp/update_kernel.$$"
 
+function checkroot {
+  if [ $USER == 'root' ]; then
+    echo ''
+    echo -e "\e[1;93mInstalling Kernel update"
+    select_kernel
+  else
+    zenity --error --title "ERROR" --text "Please use sudo"; exit 1
+    #echo -e '\e[1;31m[ERROR]\e[0m \e[1mRoot is required\e[0m'
+  fi
+}
+
 function restart {
   zenity --question --title "Reboot" --text "Reboot Now?"
   case $? in
@@ -148,7 +159,8 @@ function select_kernel {
   esac
 }
 
-select_kernel
+checkroot
+#select_kernel
 
 # Reboot now?
 restart
