@@ -1,72 +1,154 @@
 #!/bin/bash
 _zenity="/usr/bin/zenity"
 
-# Install or not?
 _out="/tmp/update_kernel.$$"
 
-# Install or not?
-zenity --question --title "Install kernel v4.14.12-lowlatency"
-case $? in
-  0) echo "Starting Download..."
-  ;;
-  1) echo "Canceled"; exit 0
-  ;;
-  *) echo "Canceled"; exit 0
-  ;;
-esac
+function restart {
+  zenity --question --title "Reboot" --text "Reboot Now?"
+  case $? in
+    0) echo "Rebooting..."; reboot
+    ;;
+    1) echo "Canceled..."; exit 0
+    ;;
+    *) echo "Canceled..."; exit 0
+    ;;
+  esac
+}
 
-mkdir ~/kernel
+function v41412 {
+  # Install or not?
+  zenity --question --title "Install kernel v4.14.12"
+  case $? in
+    0) echo "Starting Download..."
+    ;;
+    1) echo "Canceled"; select_kernel
+    ;;
+    *) echo "Canceled"; exit 0
+    ;;
+  esac
 
-if [ $? -eq 0 ]; then
-  (
-  echo "# Downloading new kernel...[1]"
-  wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412_4.14.12-041412.201801051649_all.deb -P ~/kernel/ -q
-  echo "20"
+  mkdir ~/kernel
 
-  echo "# Downloading new kernel...[2]"
-  wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412-generic_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
-  echo "30"
+  if [ $? -eq 0 ]; then
+    (
+    echo "# Downloading new kernel...[1]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412_4.14.12-041412.201801051649_all.deb -P ~/kernel/ -q
+    echo "20"
 
-  echo "# Downloading new kernel...[3]"
-  wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412-lowlatency_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
-  echo "45"
+    echo "# Downloading new kernel...[2]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412-generic_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
+    echo "30"
 
-  echo "# Downloading new kernel...[4]"
-  wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-image-4.14.12-041412-generic_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
-  echo "60"
+    echo "# Downloading new kernel...[3]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-headers-4.14.12-041412-lowlatency_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
+    echo "45"
 
-  echo "# Downloading new kernel...[5]"
-  wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-image-4.14.12-041412-lowlatency_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
-  echo "70"
-  
-  echo "# Installing new kernel"
-  dpkg -i ~/kernel/*.deb
-  echo "100"
-  echo "# Finished updating kernel"
+    echo "# Downloading new kernel...[4]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-image-4.14.12-041412-generic_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
+    echo "60"
 
-  ) |
-  # Progress bar
-  ${_zenity} --progress --title "Status" --text "Downloading New kernel...[1]" --percentage=0 --auto-close --auto-kill
+    echo "# Downloading new kernel...[5]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.12/linux-image-4.14.12-041412-lowlatency_4.14.12-041412.201801051649_amd64.deb -P ~/kernel/ -q
+    echo "70"
 
-  # Done
-  ${_zenity} --info --title "Information" --text "Done" --width "100" --height "50"
+    echo "# Installing new kernel"
+    dpkg -i ~/kernel/*.deb
+    echo "100"
+    echo "# Finished updating kernel"
 
-else
-  # Error handler
-  ${_zenity} --error --text="Error during installation... Canceled..."
+    ) |
+    # Progress bar
+    ${_zenity} --progress --title "Status" --text "Downloading New kernel...[1]" --percentage=0 --auto-close --auto-kill
+
+    # Done
+    ${_zenity} --info --title "Information" --text "Done" --width "100" --height "50"
+
+  else
+    # Error handler
+    ${_zenity} --error --text="Error during installation... Canceled..."
+    rm -rf ~/kernel/
+    exit 1
+  fi
+
+  # Cleaning up
   rm -rf ~/kernel/
-  exit 1
-fi
 
-# Cleaning up
-rm -rf ~/kernel/
+}
 
-zenity --question --title "Reboot" --text "Reboot Now?"
-case $? in
-  0) echo "Rebooting..."; reboot
-  ;;
-  1) echo "Canceled..."; exit 0
-  ;;
-  *) echo "Canceled..."; exit 0
-  ;;
-esac
+function v4150 {
+  # Install or not?
+  zenity --question --title "Install kernel v4.15.0"
+  case $? in
+    0) echo "Starting Download..."
+    ;;
+    1) echo "Canceled"; select_kernel
+    ;;
+    *) echo "Canceled"; exit 0
+    ;;
+  esac
+
+  mkdir ~/kernel
+
+  if [ $? -eq 0 ]; then
+    (
+    echo "# Downloading new kernel...[1]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500_4.15.0-041500.201802011154_all.deb -P ~/kernel/ -q
+    echo "20"
+
+    echo "# Downloading new kernel...[2]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500-generic_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    echo "30"
+
+    echo "# Downloading new kernel...[3]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500-lowlatency_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    echo "45"
+
+    echo "# Downloading new kernel...[4]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-image-4.15.0-041500-generic_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    echo "60"
+
+    echo "# Downloading new kernel...[5]"
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-image-4.15.0-041500-lowlatency_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    echo "70"
+
+    echo "# Installing new kernel"
+    dpkg -i ~/kernel/*.deb
+    echo "100"
+    echo "# Finished updating kernel"
+
+    ) |
+    # Progress bar
+    ${_zenity} --progress --title "Status" --text "Downloading New kernel...[1]" --percentage=0 --auto-close --auto-kill
+
+    # Done
+    ${_zenity} --info --title "Information" --text "Done" --width "100" --height "50"
+
+  else
+    # Error handler
+    ${_zenity} --error --text="Error during installation... Canceled..."
+    rm -rf ~/kernel/
+    exit 1
+  fi
+
+  # Cleaning up
+  rm -rf ~/kernel/
+
+}
+
+function select_kernel {
+  version=$(zenity --list 0 "v4.14.12" 1 "v4.15.0" --column="id" \
+  --column="Select your choice" --hide-column=1 --print-column=1)
+  case $version in
+    0) echo 'Installing: v4.14.12'; v41412
+    ;;
+    1) echo 'Installing: v4.15.0'; v4150
+    ;;
+    *) echo 'Invalid option'; exit 0
+    ;;
+  esac
+}
+
+select_kernel
+
+# Reboot now?
+restart
