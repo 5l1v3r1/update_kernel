@@ -77,7 +77,7 @@ function v41412 {
 
 function v4150 {
   # Install or not?
-  zenity --question --title "Install kernel v4.15.0"
+  zenity --question --title "Install kernel v4.15.9"
   case $? in
     0) echo "Starting Download..."
     ;;
@@ -92,23 +92,23 @@ function v4150 {
   if [ $? -eq 0 ]; then
     (
     echo "# Downloading new kernel...[1]"
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500_4.15.0-041500.201802011154_all.deb -P ~/kernel/ -q
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15.9/linux-headers-4.15.9-041509_4.15.9-041509.201803111231_all.deb -P ~/kernel/ -q
     echo "20"
 
     echo "# Downloading new kernel...[2]"
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500-generic_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15.9/linux-headers-4.15.9-041509-generic_4.15.9-041509.201803111231_amd64.deb -P ~/kernel/ -q
     echo "30"
 
     echo "# Downloading new kernel...[3]"
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-headers-4.15.0-041500-lowlatency_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15.9/linux-headers-4.15.9-041509-lowlatency_4.15.9-041509.201803111231_amd64.deb -P ~/kernel/ -q
     echo "45"
 
     echo "# Downloading new kernel...[4]"
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-image-4.15.0-041500-generic_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15.9/linux-image-4.15.9-041509-generic_4.15.9-041509.201803111231_amd64.deb -P ~/kernel/ -q
     echo "60"
 
     echo "# Downloading new kernel...[5]"
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15/linux-image-4.15.0-041500-lowlatency_4.15.0-041500.201802011154_amd64.deb -P ~/kernel/ -q
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.15.9/linux-image-4.15.9-041509-lowlatency_4.15.9-041509.201803111231_amd64.deb -P ~/kernel/ -q
     echo "70"
 
     echo "# Installing new kernel"
@@ -136,7 +136,7 @@ function v4150 {
 }
 
 function select_kernel {
-  version=$(zenity --list 0 "v4.14.12" 1 "v4.15.0" --column="id" \
+  version=$(zenity --list 0 "v4.14.12" 1 "v4.15.9" --column="id" \
   --column="Select your choice" --hide-column=1 --print-column=1)
   case $version in
     0) echo 'Installing: v4.14.12'; v41412
