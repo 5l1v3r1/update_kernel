@@ -152,7 +152,7 @@ function select_kernel {
   case $version in
     0) echo 'Installing: v4.14.12'; v41412
     ;;
-    1) echo 'Installing: v4.15.0'; v4150
+    1) echo 'Installing: v4.15.9'; v4150
     ;;
     *) echo 'Invalid option'; exit 0
     ;;
