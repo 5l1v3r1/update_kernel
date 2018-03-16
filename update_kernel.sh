@@ -71,7 +71,7 @@ function v4159 {
   echo -e '\e[1;32m[+]\e[0m\e[1;93m Installing New kernel\e[0m'
 
   echo -e '\e[1;96m'
-  #dpkg -i ~/kernel/*.deb
+  dpkg -i ~/kernel/*.deb
   echo -e '\e[0m'
 
   echo -e '\e[1;33m[ CLEANING UP ]\e[0m'
