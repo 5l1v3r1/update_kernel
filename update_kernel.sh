@@ -100,7 +100,7 @@ function select_kernel {
   	case $menu in
   	"v4.14.12") clear; v41412; break
   	;;
-  	"v4.15.18") clear; v4159; break
+  	"v4.15.18") clear; v41518; break
   	;;
   	"Quit") echo -e "Goodbye, \e[1;31m$USER\e[0m"; break 2
   	;;
